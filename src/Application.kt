@@ -1,5 +1,6 @@
 package com.plcoding
 
+import com.plcoding.session.DrawingSession
 import io.ktor.application.*
 import io.ktor.response.*
 import io.ktor.request.*
@@ -10,6 +11,8 @@ import io.ktor.features.*
 import org.slf4j.event.*
 import io.ktor.websocket.*
 import io.ktor.http.cio.websocket.*
+import io.ktor.sessions.*
+import io.ktor.util.*
 import java.time.*
 
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
@@ -17,6 +20,16 @@ fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 @Suppress("unused") // Referenced in application.conf
 @kotlin.jvm.JvmOverloads
 fun Application.module(testing: Boolean = false) {
+    install(Sessions) {
+        cookie<DrawingSession>("SESSION")
+    }
+    intercept(ApplicationCallPipeline.Features) {
+        if(call.sessions.get<DrawingSession>() == null) {
+            val clientId = call.parameters["client_id"] ?: ""
+            call.sessions.set(DrawingSession(clientId, generateNonce()))
+        }
+    }
+
     install(ContentNegotiation) {
         gson {
         }
