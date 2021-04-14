@@ -3,6 +3,7 @@ package com.plcoding.routes
 import com.plcoding.data.Room
 import com.plcoding.data.models.BasicApiResponse
 import com.plcoding.data.models.CreateRoomRequest
+import com.plcoding.data.models.RoomResponse
 import com.plcoding.other.Constants.MAX_ROOM_SIZE
 import com.plcoding.server
 import io.ktor.application.*
@@ -48,6 +49,27 @@ fun Route.createRoomRoute() {
             println("Room created: ${roomRequest.name}")
 
             call.respond(HttpStatusCode.OK, BasicApiResponse(true))
+        }
+    }
+}
+
+fun Route.getRoomsRoute() {
+    route("/api/getRooms") {
+        get {
+            val searchQuery = call.parameters["searchQuery"]
+            if(searchQuery == null) {
+                call.respond(HttpStatusCode.BadRequest)
+                return@get
+            }
+
+            val roomsResult = server.rooms.filterKeys {
+                it.contains(searchQuery, ignoreCase = true)
+            }
+            val roomResponses = roomsResult.values.map {
+                RoomResponse(it.name, it.maxPlayers, it.players.size)
+            }.sortedBy { it.name }
+
+            call.respond(HttpStatusCode.OK, roomResponses)
         }
     }
 }
