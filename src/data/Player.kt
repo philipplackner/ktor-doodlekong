@@ -6,7 +6,7 @@ data class Player(
     val username: String,
     var socket: WebSocketSession,
     val clientId: String,
-    var isDrawing: Boolean,
+    var isDrawing: Boolean = false,
     var score: Int = 0,
     var rank: Int = 0
 )
