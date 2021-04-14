@@ -1,5 +1,6 @@
 package com.plcoding
 
+import com.plcoding.routes.createRoomRoute
 import com.plcoding.session.DrawingSession
 import io.ktor.application.*
 import io.ktor.response.*
@@ -17,6 +18,8 @@ import java.time.*
 
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
+val server = DrawingServer()
+
 @Suppress("unused") // Referenced in application.conf
 @kotlin.jvm.JvmOverloads
 fun Application.module(testing: Boolean = false) {
@@ -28,6 +31,10 @@ fun Application.module(testing: Boolean = false) {
             val clientId = call.parameters["client_id"] ?: ""
             call.sessions.set(DrawingSession(clientId, generateNonce()))
         }
+    }
+
+    install(Routing) {
+        createRoomRoute()
     }
 
     install(ContentNegotiation) {
