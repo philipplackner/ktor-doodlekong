@@ -1,0 +1,184 @@
+Kotlin
+Flutter
+Android Development
+Python
+Machine Learning
+Artificial Intelligence
+API
+Algorithm
+Program
+Parameter
+Function
+Bug
+Integer
+Float
+Class
+Command Line
+Data Structure
+Array
+Exception
+Loop
+Recursion
+Keyword
+Pointer
+Backend
+Frontend
+Web Developer
+Server
+Database
+MongoDB
+Room
+Retrofit
+Network
+Internet
+Syntax
+Android Studio
+IT Security
+Linux
+Gradle
+Compiler
+Binary
+Processor
+Mainboard
+RAM
+CSS
+NoSQL
+GitHub
+Git
+HTML
+HTTP Request
+Swift
+Java
+JavaScript
+TypeScript
+Go
+C++
+JSON
+Coroutine
+Thread
+MVVM
+Activity
+Fragment
+Object Orientation
+Source Code
+SQL
+List
+Tree
+Unit Test
+XML
+Boolean
+Constructor
+Generics
+Flow
+LiveData
+Error
+Full Stack
+Garbage Collector
+IDE
+Navigation Component
+Inheritance
+Library
+Operator
+Regex
+Vector Graphic
+Font
+RecyclerView
+Manifest
+Dependency
+Dagger
+Timber
+ViewModel
+Emulator
+Android SDK
+Spaghetti Code
+Stack
+Variable
+Apple
+Microsoft
+Amazon
+Google
+Facebook
+Instagram
+WhatsApp
+Intel
+Samsung
+TikTok
+Bitcoin
+Email
+Protocol
+URL
+Ping
+IP
+YouTube
+Udemy
+Cookie
+Encryption
+Download
+Firewall
+Windows
+iOS
+Live Stream
+Websocket
+5G
+Twitter
+Florian
+Philipp
+Frederico
+Google Drive
+Cloud
+Hashtag
+Captcha
+Internet of Things
+Lazy Loading
+Brute Force
+404
+CPU
+Hardware
+Software
+Printer
+Speakers
+USB Stick
+Mouse
+Microphone
+Router
+Laptop
+Tablet
+Smartwatch
+Smartphone
+Computer
+Architecture
+Webcam
+Programming Language
+Object
+File
+Directory
+Antivirus
+Desktop
+Deprecated
+Malware
+Recycle Bin
+Repository
+Business Logic
+Google Play
+Terminal
+Snapchat
+DDoS
+Virtual Machine
+Tutorial
+Emoji
+RGB
+Stack Overflow
+Localhost
+Push Notification
+Port
+Password
+Cryptography
+Bluetooth
+Offline
+Hexadecimal
+Podcast
+4K
+Display
+Data Mining
+MP3
+Bitrate
