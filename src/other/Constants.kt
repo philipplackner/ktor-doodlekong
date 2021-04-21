@@ -15,6 +15,9 @@ object Constants {
     const val TYPE_NEW_WORDS = "TYPE_NEW_WORDS"
     const val TYPE_PLAYERS_LIST = "TYPE_PLAYERS_LIST"
     const val TYPE_PING = "TYPE_PING"
+    const val TYPE_DISCONNECT_REQUEST = "TYPE_DISCONNECT_REQUEST"
+    const val TYPE_DRAW_ACTION = "TYPE_DRAW_ACTION"
+    const val TYPE_CUR_ROUND_DRAW_INFO = "TYPE_CUR_ROUND_DRAW_INFO"
 
     const val PING_FREQUENCY = 3000L
 
