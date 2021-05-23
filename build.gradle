@@ -1,13 +1,16 @@
 buildscript {
     repositories {
         mavenCentral()
+        gradlePluginPortal()
     }
     
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'com.github.jengelman.gradle.plugins:shadow:5.2.0'
     }
 }
 
+apply plugin: 'com.github.johnrengelman.shadow'
 apply plugin: 'kotlin'
 apply plugin: 'application'
 
@@ -38,4 +41,11 @@ dependencies {
 
     implementation "io.ktor:ktor-server-sessions:$ktor_version"
     implementation 'com.google.code.gson:gson:2.8.6'
+}
+
+jar.enabled = false
+shadowJar {
+    manifest {
+        attributes 'Main-Class': mainClassName
+    }
 }
