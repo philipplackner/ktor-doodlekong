@@ -38,6 +38,7 @@ fun Application.module(testing: Boolean = false) {
         }
     }
 
+    install(WebSockets)
     install(Routing) {
         createRoomRoute()
         getRoomsRoute()
@@ -51,6 +52,5 @@ fun Application.module(testing: Boolean = false) {
     }
 
     install(CallLogging)
-    install(WebSockets)
 }
 
