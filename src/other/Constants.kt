@@ -2,6 +2,10 @@ package com.plcoding.other
 
 object Constants {
 
+    const val USE_LOCALHOST = false
+    const val WORDLIST_PATH_LOCALHOST = "resources/programmers_wordlist.txt"
+    const val WORDLIST_PATH_UBUNTU = "/root/doodlekong/resources/programmers_wordlist.txt"
+
     const val MAX_ROOM_SIZE = 8
 
     const val TYPE_CHAT_MESSAGE = "TYPE_CHAT_MESSAGE"

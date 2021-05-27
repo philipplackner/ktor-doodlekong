@@ -1,13 +1,18 @@
 buildscript {
     repositories {
         mavenCentral()
+        gradlePluginPortal()
     }
     
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'com.github.jengelman.gradle.plugins:shadow:5.2.0'
     }
 }
 
+configurations { sshAntTask }
+
+apply plugin: 'com.github.johnrengelman.shadow'
 apply plugin: 'kotlin'
 apply plugin: 'application'
 
@@ -38,4 +43,75 @@ dependencies {
 
     implementation "io.ktor:ktor-server-sessions:$ktor_version"
     implementation 'com.google.code.gson:gson:2.8.6'
+
+    sshAntTask 'org.apache.ant:ant-jsch:1.9.2'
+}
+
+ant.taskdef(
+        name: 'scp',
+        classname: 'org.apache.tools.ant.taskdefs.optional.ssh.Scp',
+        classpath: configurations.sshAntTask.asPath)
+
+ant.taskdef(
+        name: 'ssh',
+        classname: 'org.apache.tools.ant.taskdefs.optional.ssh.SSHExec',
+        classpath: configurations.sshAntTask.asPath)
+
+shadowJar {
+    manifest {
+        attributes 'Main-Class': mainClassName
+    }
+}
+
+task deploy() {
+    dependsOn "clean"
+    dependsOn "shadowJar"
+    doLast {
+        def knownHosts = File.createTempFile("knownhosts", "txt")
+        def user = "root"
+        def host = "212.83.56.170"
+        def pk = file("keys/ubuntu_server")
+        try {
+            ant.scp(
+                    file: file("resources/programmers_wordlist.txt"),
+                    todir: "$user@$host:/root/doodlekong/resources",
+                    keyfile: pk,
+                    trust: true,
+                    knownhosts: knownHosts
+            )
+            ant.scp(
+                    file: file("build/libs/ktor-doodlekong-$version-all.jar"),
+                    todir: "$user@$host:/root/doodlekong",
+                    keyfile: pk,
+                    trust: true,
+                    knownhosts: knownHosts
+            )
+            ant.ssh(
+                    host: host,
+                    username: user,
+                    keyfile: pk,
+                    trust: true,
+                    knownhosts: knownHosts,
+                    command: "mv /root/doodlekong/ktor-doodlekong-$version-all.jar /root/doodlekong/doodlekong.jar"
+            )
+            ant.ssh(
+                    host: host,
+                    username: user,
+                    keyfile: pk,
+                    trust: true,
+                    knownhosts: knownHosts,
+                    command: "systemctl stop doodlekong"
+            )
+            ant.ssh(
+                    host: host,
+                    username: user,
+                    keyfile: pk,
+                    trust: true,
+                    knownhosts: knownHosts,
+                    command: "systemctl start doodlekong"
+            )
+        } finally {
+            knownHosts.delete()
+        }
+    }
 }

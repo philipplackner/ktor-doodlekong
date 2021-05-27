@@ -1,8 +1,14 @@
 package com.plcoding.other
 
+import com.plcoding.other.Constants.USE_LOCALHOST
+import com.plcoding.other.Constants.WORDLIST_PATH_LOCALHOST
+import com.plcoding.other.Constants.WORDLIST_PATH_UBUNTU
 import java.io.File
 
-val words = readWordList("resources/programmers_wordlist.txt")
+val words = readWordList(
+    if(USE_LOCALHOST) WORDLIST_PATH_LOCALHOST
+    else WORDLIST_PATH_UBUNTU
+)
 
 fun readWordList(fileName: String): List<String> {
     val inputStream = File(fileName).inputStream()
